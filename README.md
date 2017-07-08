@@ -90,3 +90,22 @@ that's just a guess.
 
 One last note here: regardless of the IDE used, every submitted project must
 still be compilable with cmake and make./
+
+## Reflection
+
+### PID components
+
+P: proportional to the CTE (Cross Track Error). With high P value you react faster but oscillate and overshoot more.  
+D: controls the Derivative term by going into the opposite direction of the derivative increase. So it enables to control overshooting and enables convergence of the CTE to a constant value.  
+I: controls the Integral term i.e. the sum of all errors in the past. So it enables to overcome constant biases error by bringing back the convergence from a non zero contant value to a zero value.  
+
+### Parameters tuning
+
+Initially start with everything, Kp, Kd and Ki terms set to zero.  
+They were tuned individually one after the other starting with Kp, then Kd and finally Ki.  
+So twiddle was not used here.  
+
+Set a Kp value leading to oscillations around a somewhat constant CTE. Fix Kp.  
+Then set a Kd value to diminish oscillations. Fix Kd.  
+Then set a Ki value to make sure we converge to a zero CTE value: but here the bias was really small. So this value was not so important; a very small value was good enough. Fix Ki.  
+
